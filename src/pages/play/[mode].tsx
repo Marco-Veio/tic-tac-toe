@@ -6,7 +6,7 @@ export default function Play() {
   return (
     <Center flex={0.9}>
       <Head>
-        <title>O</title>
+        <title>Tic Tac Toe</title>
         <meta name="description" content="Created by MarcoVeio" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

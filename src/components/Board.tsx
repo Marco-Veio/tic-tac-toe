@@ -1,7 +1,25 @@
-import React from "react";
-import { Box, Button, Image, SimpleGrid } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import { IPlayer } from "@/types/player";
+import { IBoard } from "@/types/board";
+import Square from "./Square";
 
 export default function Board() {
+  const [player, setPlayer] = useState<IPlayer>("O");
+  const [board, setBoard] = useState<IBoard>([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ]);
+
+  const selectSquare = (row: number, column: number) => {
+    setBoard((oldState) => {
+      oldState[row][column] = player;
+      return oldState;
+    });
+    setPlayer((oldState) => (oldState === "X" ? "O" : "X"));
+  };
+
   return (
     <SimpleGrid w="600px" h="600px" columns={3} spacing={2} position="relative">
       <Box position="absolute" left="180" zIndex={1}>
@@ -24,15 +42,16 @@ export default function Board() {
           w={600}
         />
       </Box>
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
-      <Button h="full" w="full" opacity={0.5} />
+      {board.map((row, rowIndex) =>
+        row.map((column, columnIndex) => (
+          <Square
+            key={`id${rowIndex}${columnIndex}`}
+            id={`id${rowIndex}${columnIndex}`}
+            value={column}
+            onClick={() => selectSquare(rowIndex, columnIndex)}
+          />
+        ))
+      )}
     </SimpleGrid>
   );
 }

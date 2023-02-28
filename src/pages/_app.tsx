@@ -13,7 +13,7 @@ const font = Liu_Jian_Mao_Cao({ subsets: ["latin"], weight: ["400"] });
 export default function App({ Component, pageProps }: AppProps) {
   const [show, setShow] = useState(false);
 
-  setTimeout(() => setShow(true), 1500);
+  setTimeout(() => setShow(true), 600);
 
   return (
     <ChakraProvider

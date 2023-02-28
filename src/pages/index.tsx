@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
       {playModes.map(({ path, text }, index) => (
         <Link href={`/play/${path}`} key={path}>
-          <Text id={path} delay={index * 1500}>
+          <Text id={path} delay={index * 600}>
             {text}
           </Text>
         </Link>

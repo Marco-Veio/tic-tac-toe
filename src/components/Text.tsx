@@ -22,7 +22,7 @@ export default function Text({
       new Vara(`#${id}`, "/Parisienne.json", [
         {
           text: children,
-          duration: 1500,
+          duration: 600,
           color: "black",
           delay,
           fontSize:
@@ -35,5 +35,5 @@ export default function Text({
     }
   }, [id, children, fontSize, delay]);
 
-  return <Box id={id} ref={ref} w={35.5 * children.length} {...rest} />;
+  return <Box id={id} ref={ref} w={36 * children.length} {...rest} />;
 }
