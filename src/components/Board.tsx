@@ -1,24 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Image, SimpleGrid } from "@chakra-ui/react";
-import { IPlayer } from "@/types/player";
-import { IBoard } from "@/types/board";
-import Square from "./Square";
+import Position from "./Position";
+
+import { useBoard } from "@/hooks/board";
+import { usePlayer } from "@/hooks/player";
 
 export default function Board() {
-  const [player, setPlayer] = useState<IPlayer>("O");
-  const [board, setBoard] = useState<IBoard>([
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ]);
+  const { winner } = usePlayer();
+  const { board, selectPosition } = useBoard();
+  const [loading, setLoading] = useState(true);
 
-  const selectSquare = (row: number, column: number) => {
-    setBoard((oldState) => {
-      oldState[row][column] = player;
-      return oldState;
-    });
-    setPlayer((oldState) => (oldState === "X" ? "O" : "X"));
-  };
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => setLoading(false), 2400);
+    }
+  }, [loading]);
 
   return (
     <SimpleGrid w="600px" h="600px" columns={3} spacing={2} position="relative">
@@ -44,11 +40,12 @@ export default function Board() {
       </Box>
       {board.map((row, rowIndex) =>
         row.map((column, columnIndex) => (
-          <Square
+          <Position
             key={`id${rowIndex}${columnIndex}`}
             id={`id${rowIndex}${columnIndex}`}
+            disabled={loading || !!winner}
             value={column}
-            onClick={() => selectSquare(rowIndex, columnIndex)}
+            onClick={() => selectPosition(rowIndex, columnIndex)}
           />
         ))
       )}
