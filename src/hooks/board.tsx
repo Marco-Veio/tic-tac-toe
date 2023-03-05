@@ -1,4 +1,4 @@
-import { IBoard } from "@/types/board";
+import { IBoard, IOrientation } from "@/types/board";
 import React, {
   createContext,
   ReactNode,
@@ -12,6 +12,8 @@ type Props = { children: ReactNode };
 
 type BoardContextProps = {
   board: IBoard;
+  winPosition: number;
+  winOrientation: IOrientation;
   selectPosition: (row: number, column: number) => void;
   resetBoardContext: () => void;
 };
@@ -26,6 +28,8 @@ export function BoardProvider({ children }: Props) {
     ["", "", ""],
   ]);
   const [moves, setMoves] = useState(0);
+  const [winPosition, setWinPosition] = useState(0);
+  const [winOrientation, setWinOrientation] = useState<IOrientation>();
 
   const selectPosition = (row: number, column: number) => {
     setBoard((oldState) => {
@@ -44,14 +48,19 @@ export function BoardProvider({ children }: Props) {
       ["", "", ""],
     ]);
     setMoves(0);
+    setWinOrientation(undefined);
   };
 
   useEffect(() => {
     if (
-      (board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
-      (board[0][2] === board[1][1] && board[1][1] === board[2][0])
+      board[1][1] !== "" &&
+      ((board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
+        (board[0][2] === board[1][1] && board[1][1] === board[2][0]))
     ) {
       setWinner(board[1][1]);
+      setWinOrientation(
+        board[0][0] === board[1][1] ? "Diagonal1" : "Diagonal2"
+      );
     } else {
       for (const index in board) {
         if (
@@ -60,6 +69,8 @@ export function BoardProvider({ children }: Props) {
           board[index][1] === board[index][2]
         ) {
           setWinner(board[index][0]);
+          setWinOrientation("Horizontal");
+          setWinPosition(+index);
           return;
         }
         if (
@@ -68,6 +79,8 @@ export function BoardProvider({ children }: Props) {
           board[1][index] === board[2][index]
         ) {
           setWinner(board[0][index]);
+          setWinOrientation("Vertical");
+          setWinPosition(+index);
           return;
         }
       }
@@ -79,7 +92,15 @@ export function BoardProvider({ children }: Props) {
   }, [board, setWinner, moves]);
 
   return (
-    <BoardContext.Provider value={{ board, selectPosition, resetBoardContext }}>
+    <BoardContext.Provider
+      value={{
+        board,
+        winPosition,
+        winOrientation,
+        selectPosition,
+        resetBoardContext,
+      }}
+    >
       {children}
     </BoardContext.Provider>
   );

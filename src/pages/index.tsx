@@ -3,6 +3,9 @@ import { Center } from "@chakra-ui/layout";
 import Text from "@/components/Text";
 import Link from "next/link";
 
+import { useEffect } from "react";
+import { useBoard } from "@/hooks/board";
+
 export default function Home() {
   const playModes = [
     { path: "pvp", text: "2 Players" },
@@ -11,6 +14,12 @@ export default function Home() {
     { path: "Hard", text: "Hard" },
     { path: "Impossible", text: "Impossible" },
   ];
+
+  const { resetBoardContext } = useBoard();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => resetBoardContext(), []);
+
   return (
     <Center flex={0.9} flexDir="column">
       <Head>
