@@ -129,6 +129,7 @@ export default function BoardLine({
       right={lineDefinitions[orientation].right}
       top={lineDefinitions[orientation].top}
       bottom={lineDefinitions[orientation].bottom}
+      zIndex={1}
     >
       <svg
         width={lineDefinitions[orientation].width}
