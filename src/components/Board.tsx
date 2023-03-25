@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { SimpleGrid } from "@chakra-ui/react";
-import Position from "./Position";
+import Position from "@/components/Position";
+import BoardLine from "@/components/BoardLine";
 
 import { useBoard } from "@/hooks/board";
 import { usePlayer } from "@/hooks/player";
-import BoardLine from "./BoardLine";
-import WinningLine from "./WinningLine";
 
 export default function Board() {
   const { winner } = usePlayer();
   const { board, winPosition, winOrientation, selectPosition } = useBoard();
   const [loading, setLoading] = useState(true);
+  const [start, setStart] = useState(false);
+  const [startWin, setStartWin] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setStart(true), 0);
+  }, []);
 
   useEffect(() => {
     if (loading) {
@@ -18,12 +23,18 @@ export default function Board() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if (!!winOrientation) {
+      setTimeout(() => setStartWin(true), 0);
+    }
+  }, [winOrientation]);
+
   return (
     <SimpleGrid w="600px" h="600px" columns={3} spacing={2} position="relative">
-      <BoardLine position="Left" />
-      <BoardLine position="Right" />
-      <BoardLine position="Top" />
-      <BoardLine position="Bottom" />
+      <BoardLine visible={start} orientation="Left" />
+      <BoardLine visible={start} orientation="Right" delay={600} />
+      <BoardLine visible={start} orientation="Top" delay={1200} />
+      <BoardLine visible={start} orientation="Bottom" delay={1800} />
       {board.map((row, rowIndex) =>
         row.map((column, columnIndex) => (
           <Position
@@ -36,7 +47,11 @@ export default function Board() {
         ))
       )}
       {winOrientation && winner !== "Draw" && (
-        <WinningLine orientation={winOrientation} position={winPosition} />
+        <BoardLine
+          visible={startWin}
+          orientation={winOrientation}
+          position={winPosition}
+        />
       )}
     </SimpleGrid>
   );
