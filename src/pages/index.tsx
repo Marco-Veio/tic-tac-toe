@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Center } from "@chakra-ui/layout";
-import Text from "@/components/Text";
 import Link from "next/link";
+import Text from "@/components/Text";
 
 import { useEffect } from "react";
 import { useBoard } from "@/hooks/board";
