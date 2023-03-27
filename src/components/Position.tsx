@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
+import Text from "@/components/Text";
 
 import { IPlayerOrEmpty } from "@/types/board";
-import Text from "./Text";
 
 type Props = {
   id: string;
@@ -22,7 +22,7 @@ export default function Position({ id, value, disabled, onClick }: Props) {
     >
       {value && (
         <Text fontSize="7xl" id={id}>
-          {` ${value}`}
+          {value}
         </Text>
       )}
     </Button>
