@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import { BoardPaths } from "./BoardPaths";
 
-type Props = {
+interface Props {
   visible: boolean;
   orientation:
     | "Top"
@@ -15,7 +15,7 @@ type Props = {
     | "Diagonal2";
   delay?: number;
   position?: number;
-};
+}
 
 export default function BoardLine({
   visible,

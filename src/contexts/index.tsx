@@ -8,7 +8,9 @@ import { BoardProvider } from "@/hooks/board";
 
 const font = Liu_Jian_Mao_Cao({ subsets: ["latin"], weight: ["400"] });
 
-type Props = { children: ReactNode };
+interface Props {
+  children: ReactNode;
+}
 
 export default function MainProvider({ children }: Props) {
   return (

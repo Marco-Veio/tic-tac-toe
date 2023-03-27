@@ -4,6 +4,12 @@ import Vara from "vara";
 
 import font from "../../public/Parisienne.json";
 
+import {
+  ANIMATION_DURATION,
+  DEFAULT_FONT_SIZE,
+  FONT_SIZE_PROPORTION,
+} from "@/utils/constants";
+
 interface Props extends HeadingProps {
   id: string;
   delay?: number;
@@ -28,7 +34,7 @@ export default function Text({
     [fontSize]
   );
   const fontProportion = useMemo(
-    () => (0.8785557867671893 * realFontSize) / 24,
+    () => (FONT_SIZE_PROPORTION * realFontSize) / DEFAULT_FONT_SIZE,
     [realFontSize]
   );
 
@@ -37,7 +43,7 @@ export default function Text({
       const text = new Vara(`#${id}`, "/Parisienne.json", [
         {
           text: children,
-          duration: 600,
+          duration: ANIMATION_DURATION,
           color: "black",
           delay,
           textAlign: "center",
