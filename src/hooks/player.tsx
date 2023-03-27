@@ -2,15 +2,17 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 
 import { IPlayer, IWinner } from "@/types/player";
 
-type Props = { children: ReactNode };
+interface Props {
+  children: ReactNode;
+}
 
-type PlayerContextProps = {
+interface PlayerContextProps {
   player: IPlayer;
   winner: IWinner;
   togglePlayer: () => void;
   setWinner: React.Dispatch<React.SetStateAction<IWinner>>;
   resetPlayerContext: () => void;
-};
+}
 
 const PlayerContext = createContext({} as PlayerContextProps);
 

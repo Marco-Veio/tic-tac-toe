@@ -8,15 +8,17 @@ import React, {
 } from "react";
 import { usePlayer } from "./player";
 
-type Props = { children: ReactNode };
+interface Props {
+  children: ReactNode;
+}
 
-type BoardContextProps = {
+interface BoardContextProps {
   board: IBoard;
   winPosition: number;
   winOrientation: IOrientation;
   selectPosition: (row: number, column: number) => void;
   resetBoardContext: () => void;
-};
+}
 
 const BoardContext = createContext({} as BoardContextProps);
 
