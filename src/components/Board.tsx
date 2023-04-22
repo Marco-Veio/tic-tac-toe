@@ -9,12 +9,13 @@ import { usePlayer } from "@/hooks/player";
 import { useBot } from "@/hooks/bot";
 
 import { ANIMATION_DURATION } from "@/utils/constants";
+import { IMode } from "@/types/mode";
 
 export default function Board() {
   const router = useRouter();
   const { player, winner } = usePlayer();
   const { board, winPosition, winOrientation, selectPosition } = useBoard();
-  const { bot, sortBot } = useBot();
+  const { bot, sortBot, setMode } = useBot();
   const [loading, setLoading] = useState(true);
   const [start, setStart] = useState(false);
   const [startWin, setStartWin] = useState(false);
@@ -22,6 +23,7 @@ export default function Board() {
   const { mode } = router.query;
 
   useEffect(() => {
+    setMode(mode as IMode);
     setTimeout(() => setStart(true), 0);
   }, []);
 
@@ -34,7 +36,6 @@ export default function Board() {
         }
       }, ANIMATION_DURATION * 4);
     }
-    // eslint-disable-next-line
   }, [loading, mode, start]);
 
   useEffect(() => {

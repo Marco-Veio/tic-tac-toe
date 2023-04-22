@@ -22,7 +22,6 @@ export default function Home() {
   useEffect(() => {
     setBot("");
     resetBoardContext();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
