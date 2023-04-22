@@ -3,27 +3,39 @@ import { SimpleGrid } from "@chakra-ui/react";
 import Position from "@/components/Position";
 import BoardLine from "@/components/BoardLine";
 
+import { useRouter } from "next/router";
 import { useBoard } from "@/hooks/board";
 import { usePlayer } from "@/hooks/player";
+import { useBot } from "@/hooks/bot";
 
 import { ANIMATION_DURATION } from "@/utils/constants";
 
 export default function Board() {
-  const { winner } = usePlayer();
+  const router = useRouter();
+  const { player, winner } = usePlayer();
   const { board, winPosition, winOrientation, selectPosition } = useBoard();
+  const { bot, sortBot } = useBot();
   const [loading, setLoading] = useState(true);
   const [start, setStart] = useState(false);
   const [startWin, setStartWin] = useState(false);
+
+  const { mode } = router.query;
 
   useEffect(() => {
     setTimeout(() => setStart(true), 0);
   }, []);
 
   useEffect(() => {
-    if (loading) {
-      setTimeout(() => setLoading(false), ANIMATION_DURATION * 4);
+    if (loading && start) {
+      setTimeout(() => {
+        setLoading(false);
+        if (mode !== "pvp") {
+          sortBot();
+        }
+      }, ANIMATION_DURATION * 4);
     }
-  }, [loading]);
+    // eslint-disable-next-line
+  }, [loading, mode, start]);
 
   useEffect(() => {
     if (!!winOrientation) {
@@ -54,7 +66,7 @@ export default function Board() {
           <Position
             key={`id${rowIndex}${columnIndex}`}
             id={`id${rowIndex}${columnIndex}`}
-            disabled={loading || !!winner}
+            disabled={loading || !!winner || player === bot}
             value={column}
             onClick={() => selectPosition(rowIndex, columnIndex)}
           />
