@@ -5,6 +5,7 @@ import Text from "@/components/Text";
 
 import { useEffect } from "react";
 import { useBoard } from "@/hooks/board";
+import { useBot } from "@/hooks/bot";
 
 export default function Home() {
   const playModes = [
@@ -16,9 +17,13 @@ export default function Home() {
   ];
 
   const { resetBoardContext } = useBoard();
+  const { setBot } = useBot();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => resetBoardContext(), []);
+  useEffect(() => {
+    setBot("");
+    resetBoardContext();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Center flex={0.9} flexDir="column">

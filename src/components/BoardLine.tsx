@@ -138,21 +138,21 @@ export default function BoardLine({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path={`url(#clip0_0_1_${orientation})`}>
+        <g clipPath={`url(#clip0_0_1_${orientation})`}>
           <BoardPaths
             orientation={orientation}
             visible={visible}
             delay={delay}
           />
         </g>
-        <g clip-path={`url(#clip1_0_1_${orientation})`}>
+        <g clipPath={`url(#clip1_0_1_${orientation})`}>
           <BoardPaths
             orientation={orientation}
             visible={visible}
             delay={delay}
           />
         </g>
-        <g clip-path={`url(#clip2_0_1_${orientation})`}>
+        <g clipPath={`url(#clip2_0_1_${orientation})`}>
           <BoardPaths
             orientation={orientation}
             visible={visible}

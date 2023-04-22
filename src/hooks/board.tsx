@@ -14,6 +14,7 @@ interface Props {
 
 interface BoardContextProps {
   board: IBoard;
+  checkingWinner: boolean;
   winPosition: number;
   winOrientation: IOrientation;
   selectPosition: (row: number, column: number) => void;
@@ -32,8 +33,10 @@ export function BoardProvider({ children }: Props) {
   const [moves, setMoves] = useState(0);
   const [winPosition, setWinPosition] = useState(0);
   const [winOrientation, setWinOrientation] = useState<IOrientation>();
+  const [checkingWinner, setCheckingWinner] = useState(false);
 
   const selectPosition = (row: number, column: number) => {
+    setCheckingWinner(true);
     setBoard((oldState) => {
       oldState[row][column] = player;
       return oldState;
@@ -51,6 +54,7 @@ export function BoardProvider({ children }: Props) {
     ]);
     setMoves(0);
     setWinOrientation(undefined);
+    setCheckingWinner(false);
   };
 
   useEffect(() => {
@@ -61,8 +65,11 @@ export function BoardProvider({ children }: Props) {
     ) {
       setWinner(board[1][1]);
       setWinOrientation(
-        board[0][0] === board[1][1] ? "Diagonal1" : "Diagonal2"
+        board[0][0] === board[1][1] && board[2][2] === board[1][1]
+          ? "Diagonal1"
+          : "Diagonal2"
       );
+      setCheckingWinner(false);
     } else {
       for (const index in board) {
         if (
@@ -73,6 +80,7 @@ export function BoardProvider({ children }: Props) {
           setWinner(board[index][0]);
           setWinOrientation("Horizontal");
           setWinPosition(+index);
+          setCheckingWinner(false);
           return;
         }
         if (
@@ -83,20 +91,24 @@ export function BoardProvider({ children }: Props) {
           setWinner(board[0][index]);
           setWinOrientation("Vertical");
           setWinPosition(+index);
+          setCheckingWinner(false);
           return;
         }
       }
       if (moves === 9) {
         setWinner("Draw");
+        setCheckingWinner(false);
         return;
       }
     }
+    setCheckingWinner(false);
   }, [board, setWinner, moves]);
 
   return (
     <BoardContext.Provider
       value={{
         board,
+        checkingWinner,
         winPosition,
         winOrientation,
         selectPosition,

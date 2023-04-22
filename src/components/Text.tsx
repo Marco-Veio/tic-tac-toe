@@ -40,7 +40,7 @@ export default function Text({
 
   useEffect(() => {
     if (!ref.current?.childElementCount) {
-      const text = new Vara(`#${id}`, "/Parisienne.json", [
+      new Vara(`#${id}`, "/Parisienne.json", [
         {
           text: children,
           duration: ANIMATION_DURATION,
@@ -50,7 +50,6 @@ export default function Text({
           fontSize: realFontSize,
         },
       ]);
-      console.log(text);
     }
   }, [id, children, realFontSize, delay]);
 
