@@ -5,20 +5,24 @@ import Text from "@/components/Text";
 
 import { useEffect } from "react";
 import { useBoard } from "@/hooks/board";
+import { useBot } from "@/hooks/bot";
 
 export default function Home() {
   const playModes = [
     { path: "pvp", text: "2 Players" },
     { path: "easy", text: "Easy" },
-    { path: "Medium", text: "Medium" },
-    { path: "Hard", text: "Hard" },
-    { path: "Impossible", text: "Impossible" },
+    { path: "medium", text: "Medium" },
+    { path: "hard", text: "Hard" },
+    { path: "impossible", text: "Impossible" },
   ];
 
   const { resetBoardContext } = useBoard();
+  const { setBot } = useBot();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => resetBoardContext(), []);
+  useEffect(() => {
+    setBot("");
+    resetBoardContext();
+  }, []);
 
   return (
     <Center flex={0.9} flexDir="column">

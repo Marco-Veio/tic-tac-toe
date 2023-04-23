@@ -4,12 +4,12 @@ import Text from "@/components/Text";
 
 import { IPlayerOrEmpty } from "@/types/board";
 
-type Props = {
+interface Props {
   id: string;
   value: IPlayerOrEmpty;
   disabled: boolean;
   onClick: () => void;
-};
+}
 
 export default function Position({ id, value, disabled, onClick }: Props) {
   return (

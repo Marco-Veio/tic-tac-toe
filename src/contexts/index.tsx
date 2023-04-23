@@ -5,10 +5,13 @@ import { Liu_Jian_Mao_Cao } from "@next/font/google";
 import { PlayerProvider } from "@/hooks/player";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { BoardProvider } from "@/hooks/board";
+import { BotProvider } from "@/hooks/bot";
 
 const font = Liu_Jian_Mao_Cao({ subsets: ["latin"], weight: ["400"] });
 
-type Props = { children: ReactNode };
+interface Props {
+  children: ReactNode;
+}
 
 export default function MainProvider({ children }: Props) {
   return (
@@ -21,7 +24,9 @@ export default function MainProvider({ children }: Props) {
       })}
     >
       <PlayerProvider>
-        <BoardProvider>{children}</BoardProvider>
+        <BoardProvider>
+          <BotProvider>{children}</BotProvider>
+        </BoardProvider>
       </PlayerProvider>
     </ChakraProvider>
   );

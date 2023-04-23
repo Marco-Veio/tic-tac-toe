@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
 
+import { ANIMATION_DURATION } from "@/utils/constants";
+
 interface Props {
   visible: boolean;
   orientation:
@@ -22,7 +24,7 @@ export function BoardPaths({ visible, orientation, delay = 0 }: Props) {
     strokeDashoffset: visible ? 0 : length,
     delay,
     config: {
-      duration: 600,
+      duration: ANIMATION_DURATION,
     },
   });
 
