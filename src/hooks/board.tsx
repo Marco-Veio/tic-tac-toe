@@ -17,6 +17,7 @@ interface BoardContextProps {
   checkingWinner: boolean;
   winPosition: number;
   winOrientation: IOrientation;
+  moves: number;
   selectPosition: (row: number, column: number) => void;
   resetBoardContext: () => void;
 }
@@ -111,6 +112,7 @@ export function BoardProvider({ children }: Props) {
         checkingWinner,
         winPosition,
         winOrientation,
+        moves,
         selectPosition,
         resetBoardContext,
       }}

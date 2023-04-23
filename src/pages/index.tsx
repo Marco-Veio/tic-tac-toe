@@ -11,9 +11,9 @@ export default function Home() {
   const playModes = [
     { path: "pvp", text: "2 Players" },
     { path: "easy", text: "Easy" },
-    { path: "Medium", text: "Medium" },
-    { path: "Hard", text: "Hard" },
-    { path: "Impossible", text: "Impossible" },
+    { path: "medium", text: "Medium" },
+    { path: "hard", text: "Hard" },
+    { path: "impossible", text: "Impossible" },
   ];
 
   const { resetBoardContext } = useBoard();
