@@ -102,7 +102,7 @@ export function BoardProvider({ children }: Props) {
       }
     }
     setCheckingWinner(false);
-  }, [board, setWinner, moves]);
+  }, [moves]);
 
   return (
     <BoardContext.Provider

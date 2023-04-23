@@ -30,11 +30,11 @@ export function BotProvider({ children }: Props) {
   const [bot, setBot] = useState<IPlayerOrEmpty>("");
   const [mode, setMode] = useState<IModeOrEmpty>("");
 
-  const { board, selectPosition, checkingWinner, winOrientation } = useBoard();
-  const { player } = usePlayer();
+  const { board, selectPosition, checkingWinner } = useBoard();
+  const { player, winner } = usePlayer();
 
   useEffect(() => {
-    if (!checkingWinner && !winOrientation && player === bot) {
+    if (!checkingWinner && !winner && player === bot) {
       setTimeout(() => botMove(), ANIMATION_DURATION);
     }
   }, [checkingWinner]);
@@ -45,6 +45,41 @@ export function BotProvider({ children }: Props) {
       if (position) {
         selectPosition(position[0], position[1]);
         return;
+      }
+
+      if (mode !== "medium") {
+        const cornerPositions = [
+          [0, 0],
+          [0, 2],
+          [2, 0],
+          [2, 2],
+        ];
+
+        const freeCornerPositions = [] as number[][];
+        for (const cornerPosition of cornerPositions) {
+          if (!board[cornerPosition[0]][cornerPosition[1]]) {
+            freeCornerPositions.push(cornerPosition);
+          }
+        }
+
+        if (freeCornerPositions.length) {
+          for (const freeCornerPosition of freeCornerPositions) {
+            const row = freeCornerPosition[0] ? 0 : 2;
+            const column = freeCornerPosition[1] ? 0 : 2;
+
+            if (board[row][column]) {
+              selectPosition(freeCornerPosition[0], freeCornerPosition[1]);
+              return;
+            }
+          }
+
+          const position = sort(0, freeCornerPositions.length - 1);
+          selectPosition(
+            freeCornerPositions[position][0],
+            freeCornerPositions[position][1]
+          );
+          return;
+        }
       }
     }
     sortPosition();
