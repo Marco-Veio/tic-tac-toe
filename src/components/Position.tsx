@@ -15,8 +15,8 @@ export default function Position({ id, value, disabled, onClick }: Props) {
   return (
     <Button
       onClick={onClick}
-      h="195"
-      w="195"
+      h={{ base: "95", md: "195" }}
+      w={{ base: "95", md: "195" }}
       bgColor="transparent"
       isDisabled={!!value || disabled}
     >
