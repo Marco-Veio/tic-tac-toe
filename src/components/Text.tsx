@@ -25,6 +25,7 @@ export default function Text({ id, children, delay = 0, ...rest }: Props) {
   );
 
   useEffect(() => setBk((oldState) => ++oldState), [fontSize]);
+  console.log(bk);
 
   const realFontSize = useMemo(() => {
     if (bk > 1) {

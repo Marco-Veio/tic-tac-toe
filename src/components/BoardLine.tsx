@@ -136,7 +136,7 @@ export default function BoardLine({
           height: 600 * size,
           viewBox: `0 0 ${600 * size} ${600 * size}`,
           transform: [
-            `translate({${400 * size})`,
+            `translate(${400 * size})`,
             `translate(${200 * size})`,
             undefined,
           ],
