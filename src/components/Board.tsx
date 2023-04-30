@@ -45,7 +45,13 @@ export default function Board() {
   }, [winOrientation]);
 
   return (
-    <SimpleGrid w="600px" h="600px" columns={3} spacing={2} position="relative">
+    <SimpleGrid
+      w={{ base: "300px", md: "600px" }}
+      h={{ base: "300px", md: "600px" }}
+      columns={3}
+      spacing={2}
+      position="relative"
+    >
       <BoardLine visible={start} orientation="Left" />
       <BoardLine
         visible={start}

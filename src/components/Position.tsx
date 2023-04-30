@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import Text from "@/components/Text";
+import { css } from "@emotion/react";
 
 import { IPlayerOrEmpty } from "@/types/board";
 
@@ -15,13 +16,24 @@ export default function Position({ id, value, disabled, onClick }: Props) {
   return (
     <Button
       onClick={onClick}
-      h="195"
-      w="195"
+      h={{ base: "95", md: "195" }}
+      w={{ base: "95", md: "195" }}
       bgColor="transparent"
       isDisabled={!!value || disabled}
+      _disabled={{
+        bg: "transparent",
+        _hover: {
+          bg: "transparent",
+        },
+      }}
+      css={css`
+        &:disabled {
+          cursor: not-allowed !important;
+        }
+      `}
     >
       {value && (
-        <Text fontSize="7xl" id={id}>
+        <Text id={id} fontSize={{ base: "5xl", md: "7xl" }}>
           {value}
         </Text>
       )}
