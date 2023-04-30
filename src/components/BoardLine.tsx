@@ -1,6 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Box, useBreakpointValue } from "@chakra-ui/react";
+import React, { useMemo } from "react";
+import { Box } from "@chakra-ui/react";
 import { BoardPaths } from "./BoardPaths";
+
+import { useBreakpoint } from "@/hooks/breakpoint";
 
 interface Props {
   visible: boolean;
@@ -23,13 +25,11 @@ export default function BoardLine({
   delay,
   position = 0,
 }: Props) {
-  const [bk, setBk] = useState(0);
-  const size = useBreakpointValue({ base: 0.5, md: 1 }, { fallback: "md" });
-
-  useEffect(() => setBk((oldState) => ++oldState), [size]);
+  const { getBreakpointValue } = useBreakpoint();
+  const size = getBreakpointValue({ base: 0.5, md: 1 });
 
   const lineDefinitions = useMemo(() => {
-    if (bk > 1 && size) {
+    if (size) {
       return {
         Left: {
           left: 200 * size - 5,
@@ -162,7 +162,7 @@ export default function BoardLine({
       };
     }
     return null;
-  }, [bk]);
+  }, []);
 
   if (lineDefinitions && size) {
     return (

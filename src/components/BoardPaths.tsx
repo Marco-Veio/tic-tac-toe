@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { animated, useSpring } from "react-spring";
 
+import { useTheme } from "@chakra-ui/react";
 import { ANIMATION_DURATION } from "@/utils/constants";
 
 interface Props {
@@ -28,6 +29,7 @@ export function BoardPaths({ visible, orientation, size, delay = 0 }: Props) {
       duration: ANIMATION_DURATION,
     },
   });
+  const theme = useTheme();
 
   const d = {
     Left: `M0 0C9.05548 ${120.486 * size} 3.77312 ${450.202 * size} 0 ${
@@ -61,7 +63,7 @@ export function BoardPaths({ visible, orientation, size, delay = 0 }: Props) {
         }
       }}
       d={d[orientation]}
-      stroke="black"
+      stroke={theme.colors.black}
     />
   );
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Box, HeadingProps, theme, useBreakpointValue } from "@chakra-ui/react";
+import { Box, HeadingProps, useTheme } from "@chakra-ui/react";
 import Vara from "vara";
+
+import { useBreakpoint } from "@/hooks/breakpoint";
 
 import font from "../../public/Parisienne.json";
 
@@ -16,31 +18,32 @@ interface Props extends HeadingProps {
   children: string;
 }
 
-export default function Text({ id, children, delay = 0, ...rest }: Props) {
+export default function Text({
+  id,
+  children,
+  delay = 0,
+  fontSize = { base: "4xl", md: "6xl" },
+  ...rest
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const [bk, setBk] = useState(0);
-  const fontSize = useBreakpointValue(
-    { base: "4xl", md: "6xl" },
-    { fallback: "md" }
-  );
+  const { getBreakpointValue } = useBreakpoint();
+  const size = getBreakpointValue(fontSize);
 
-  useEffect(() => setBk((oldState) => ++oldState), [fontSize]);
-  console.log(bk);
+  const theme = useTheme();
 
   const realFontSize = useMemo(() => {
-    if (bk > 1) {
-      return (
-        +theme.fontSizes[fontSize as keyof typeof theme.fontSizes].replace(
-          "rem",
-          ""
-        ) * 16
-      );
-    }
-  }, [bk]);
+    return (
+      +theme.fontSizes[size as keyof typeof theme.fontSizes].replace(
+        "rem",
+        ""
+      ) * 16
+    );
+  }, []);
 
   const fontProportion = useMemo(() => {
-    if (realFontSize)
+    if (realFontSize) {
       return (FONT_SIZE_PROPORTION * realFontSize) / DEFAULT_FONT_SIZE;
+    }
   }, [realFontSize]);
 
   useEffect(() => {
@@ -49,10 +52,11 @@ export default function Text({ id, children, delay = 0, ...rest }: Props) {
         {
           text: children,
           duration: ANIMATION_DURATION,
-          color: "black",
+          color: theme.colors.black,
           delay,
           textAlign: "center",
           fontSize: realFontSize,
+          strokeWidth: 0.8,
         },
       ]);
     }
