@@ -53,21 +53,9 @@ export default function Board() {
       position="relative"
     >
       <BoardLine visible={start} orientation="Left" />
-      <BoardLine
-        visible={start}
-        orientation="Right"
-        delay={ANIMATION_DURATION}
-      />
-      <BoardLine
-        visible={start}
-        orientation="Top"
-        delay={ANIMATION_DURATION * 2}
-      />
-      <BoardLine
-        visible={start}
-        orientation="Bottom"
-        delay={ANIMATION_DURATION * 3}
-      />
+      <BoardLine visible={start} orientation="Right" delay={ANIMATION_DURATION} />
+      <BoardLine visible={start} orientation="Top" delay={ANIMATION_DURATION * 2} />
+      <BoardLine visible={start} orientation="Bottom" delay={ANIMATION_DURATION * 3} />
       {board.map((row, rowIndex) =>
         row.map((column, columnIndex) => (
           <Position
@@ -77,14 +65,10 @@ export default function Board() {
             value={column}
             onClick={() => selectPosition(rowIndex, columnIndex)}
           />
-        ))
+        )),
       )}
       {winOrientation && winner !== "Draw" && (
-        <BoardLine
-          visible={startWin}
-          orientation={winOrientation}
-          position={winPosition}
-        />
+        <BoardLine visible={startWin} orientation={winOrientation} position={winPosition} />
       )}
     </SimpleGrid>
   );

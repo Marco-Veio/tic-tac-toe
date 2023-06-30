@@ -6,11 +6,7 @@ import { useBreakpoint } from "@/hooks/breakpoint";
 
 import font from "../../public/Parisienne.json";
 
-import {
-  ANIMATION_DURATION,
-  DEFAULT_FONT_SIZE,
-  FONT_SIZE_PROPORTION,
-} from "@/utils/constants";
+import { ANIMATION_DURATION, DEFAULT_FONT_SIZE, FONT_SIZE_PROPORTION } from "@/utils/constants";
 
 interface Props extends HeadingProps {
   id: string;
@@ -18,13 +14,7 @@ interface Props extends HeadingProps {
   children: string;
 }
 
-export default function Text({
-  id,
-  children,
-  delay = 0,
-  fontSize = { base: "4xl", md: "6xl" },
-  ...rest
-}: Props) {
+export default function Text({ id, children, delay = 0, fontSize = { base: "4xl", md: "6xl" }, ...rest }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { getBreakpointValue } = useBreakpoint();
   const size = getBreakpointValue(fontSize);
@@ -32,12 +22,7 @@ export default function Text({
   const theme = useTheme();
 
   const realFontSize = useMemo(() => {
-    return (
-      +theme.fontSizes[size as keyof typeof theme.fontSizes].replace(
-        "rem",
-        ""
-      ) * 16
-    );
+    return +theme.fontSizes[size as keyof typeof theme.fontSizes].replace("rem", "") * 16;
   }, []);
 
   const fontProportion = useMemo(() => {

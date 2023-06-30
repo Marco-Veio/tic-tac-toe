@@ -20,8 +20,7 @@ export function PlayerProvider({ children }: Props) {
   const [player, setPlayer] = useState<IPlayer>("O");
   const [winner, setWinner] = useState<IWinner>("");
 
-  const togglePlayer = () =>
-    setPlayer((oldState) => (oldState === "O" ? "X" : "O"));
+  const togglePlayer = () => setPlayer(oldState => (oldState === "O" ? "X" : "O"));
 
   const resetPlayerContext = () => {
     setPlayer("O");
@@ -29,9 +28,7 @@ export function PlayerProvider({ children }: Props) {
   };
 
   return (
-    <PlayerContext.Provider
-      value={{ player, winner, togglePlayer, setWinner, resetPlayerContext }}
-    >
+    <PlayerContext.Provider value={{ player, winner, togglePlayer, setWinner, resetPlayerContext }}>
       {children}
     </PlayerContext.Provider>
   );

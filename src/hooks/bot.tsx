@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useBoard } from "./board";
 import { usePlayer } from "./player";
 
@@ -97,10 +91,7 @@ export function BotProvider({ children }: Props) {
           }
 
           const position = sort(0, freeGoodPositions.length - 1);
-          selectPosition(
-            freeGoodPositions[position][0],
-            freeGoodPositions[position][1]
-          );
+          selectPosition(freeGoodPositions[position][0], freeGoodPositions[position][1]);
           return;
         }
       }
@@ -108,8 +99,7 @@ export function BotProvider({ children }: Props) {
     sortPosition();
   };
 
-  const sort = (min = 0, max = 2) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
+  const sort = (min = 0, max = 2) => Math.floor(Math.random() * (max - min + 1)) + min;
 
   const sortPosition = () => {
     let row = sort();
@@ -159,15 +149,9 @@ export function BotProvider({ children }: Props) {
     for (const [index, possibility] of possibilities.entries()) {
       const emptyIndex = possibility.indexOf("");
 
-      if (
-        possibility.filter((p) => p === bot).length === 2 &&
-        emptyIndex !== -1
-      ) {
+      if (possibility.filter(p => p === bot).length === 2 && emptyIndex !== -1) {
         return getLosingPosition(index, emptyIndex);
-      } else if (
-        possibility.filter((p) => p !== bot && p !== "").length === 2 &&
-        emptyIndex !== -1
-      ) {
+      } else if (possibility.filter(p => p !== bot && p !== "").length === 2 && emptyIndex !== -1) {
         losingPosition = getLosingPosition(index, emptyIndex);
       }
     }
@@ -175,11 +159,7 @@ export function BotProvider({ children }: Props) {
     return losingPosition;
   };
 
-  return (
-    <BotContext.Provider value={{ bot, setBot, sortBot, setMode }}>
-      {children}
-    </BotContext.Provider>
-  );
+  return <BotContext.Provider value={{ bot, setBot, sortBot, setMode }}>{children}</BotContext.Provider>;
 }
 
 export const useBot = () => useContext(BotContext);
