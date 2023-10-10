@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Liu_Jian_Mao_Cao } from "@next/font/google";
+import { Liu_Jian_Mao_Cao } from "next/font/google";
 
 import { PlayerProvider } from "@/hooks/player";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
