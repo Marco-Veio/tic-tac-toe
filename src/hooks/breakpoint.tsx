@@ -31,9 +31,7 @@ export function BreakpointProvider({ children }: Props) {
           return values[breakpoint];
         }
 
-        for (const nearestBreakpoint of breakpoints
-          .splice(0, breakpoints.indexOf(breakpoint))
-          .reverse()) {
+        for (const nearestBreakpoint of breakpoints.splice(0, breakpoints.indexOf(breakpoint)).reverse()) {
           if (values[nearestBreakpoint]) {
             return values[nearestBreakpoint];
           }
@@ -43,11 +41,7 @@ export function BreakpointProvider({ children }: Props) {
     return values;
   };
 
-  return (
-    <BreakpointContext.Provider value={{ breakpoint, getBreakpointValue }}>
-      {children}
-    </BreakpointContext.Provider>
-  );
+  return <BreakpointContext.Provider value={{ breakpoint, getBreakpointValue }}>{children}</BreakpointContext.Provider>;
 }
 
 export const useBreakpoint = () => useContext(BreakpointContext);

@@ -1,11 +1,5 @@
 import { IBoard, IOrientation } from "@/types/board";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { usePlayer } from "./player";
 
 interface Props {
@@ -38,11 +32,11 @@ export function BoardProvider({ children }: Props) {
 
   const selectPosition = (row: number, column: number) => {
     setCheckingWinner(true);
-    setBoard((oldState) => {
+    setBoard(oldState => {
       oldState[row][column] = player;
       return oldState;
     });
-    setMoves((oldState) => ++oldState);
+    setMoves(oldState => ++oldState);
     togglePlayer();
   };
 
@@ -65,30 +59,18 @@ export function BoardProvider({ children }: Props) {
         (board[0][2] === board[1][1] && board[1][1] === board[2][0]))
     ) {
       setWinner(board[1][1]);
-      setWinOrientation(
-        board[0][0] === board[1][1] && board[2][2] === board[1][1]
-          ? "Diagonal1"
-          : "Diagonal2"
-      );
+      setWinOrientation(board[0][0] === board[1][1] && board[2][2] === board[1][1] ? "Diagonal1" : "Diagonal2");
       setCheckingWinner(false);
     } else {
       for (const index in board) {
-        if (
-          board[index][0] !== "" &&
-          board[index][0] === board[index][1] &&
-          board[index][1] === board[index][2]
-        ) {
+        if (board[index][0] !== "" && board[index][0] === board[index][1] && board[index][1] === board[index][2]) {
           setWinner(board[index][0]);
           setWinOrientation("Horizontal");
           setWinPosition(+index);
           setCheckingWinner(false);
           return;
         }
-        if (
-          board[0][index] !== "" &&
-          board[0][index] === board[1][index] &&
-          board[1][index] === board[2][index]
-        ) {
+        if (board[0][index] !== "" && board[0][index] === board[1][index] && board[1][index] === board[2][index]) {
           setWinner(board[0][index]);
           setWinOrientation("Vertical");
           setWinPosition(+index);

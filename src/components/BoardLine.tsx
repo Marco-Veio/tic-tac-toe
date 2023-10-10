@@ -6,25 +6,12 @@ import { useBreakpoint } from "@/hooks/breakpoint";
 
 interface Props {
   visible: boolean;
-  orientation:
-    | "Top"
-    | "Bottom"
-    | "Left"
-    | "Right"
-    | "Horizontal"
-    | "Vertical"
-    | "Diagonal1"
-    | "Diagonal2";
+  orientation: "Top" | "Bottom" | "Left" | "Right" | "Horizontal" | "Vertical" | "Diagonal1" | "Diagonal2";
   delay?: number;
   position?: number;
 }
 
-export default function BoardLine({
-  visible,
-  orientation,
-  delay,
-  position = 0,
-}: Props) {
+export default function BoardLine({ visible, orientation, delay, position = 0 }: Props) {
   const { getBreakpointValue } = useBreakpoint();
   const size = getBreakpointValue({ base: 0.5, md: 1 });
 
@@ -39,11 +26,7 @@ export default function BoardLine({
           width: 5,
           height: 600 * size,
           viewBox: `0 0 5 ${600 * size}`,
-          transform: [
-            `translate(0 ${400 * size})`,
-            `translate(0 ${200 * size})`,
-            undefined,
-          ],
+          transform: [`translate(0 ${400 * size})`, `translate(0 ${200 * size})`, undefined],
           rectWidth: 5,
           rectHeight: 200 * size,
         },
@@ -55,11 +38,7 @@ export default function BoardLine({
           width: 10,
           height: 600 * size,
           viewBox: `0 0 10 ${600 * size}`,
-          transform: [
-            `translate(0 ${400 * size})`,
-            `translate(0 ${200 * size})`,
-            undefined,
-          ],
+          transform: [`translate(0 ${400 * size})`, `translate(0 ${200 * size})`, undefined],
           rectWidth: 9.55556,
           rectHeight: 200 * size,
         },
@@ -71,11 +50,7 @@ export default function BoardLine({
           width: 600 * size,
           height: 6,
           viewBox: `0 0 ${600 * size} 6`,
-          transform: [
-            `translate(${200 * size})`,
-            `translate(${400 * size})`,
-            undefined,
-          ],
+          transform: [`translate(${200 * size})`, `translate(${400 * size})`, undefined],
           rectWidth: 200 * size,
           rectHeight: 6,
         },
@@ -87,11 +62,7 @@ export default function BoardLine({
           width: 600 * size,
           height: 6,
           viewBox: `0 0 ${600 * size} 6`,
-          transform: [
-            `translate(${200 * size})`,
-            `translate(${400 * size})`,
-            undefined,
-          ],
+          transform: [`translate(${200 * size})`, `translate(${400 * size})`, undefined],
           rectWidth: 200 * size,
           rectHeight: 6,
         },
@@ -103,11 +74,7 @@ export default function BoardLine({
           width: 600 * size,
           height: 5,
           viewBox: `0 0 ${600 * size} 5`,
-          transform: [
-            `translate(${400 * size})`,
-            `translate(${200 * size})`,
-            undefined,
-          ],
+          transform: [`translate(${400 * size})`, `translate(${200 * size})`, undefined],
           rectWidth: 200 * size,
           rectHeight: 5,
         },
@@ -119,11 +86,7 @@ export default function BoardLine({
           width: 5,
           height: 600 * size,
           viewBox: `0 0 5 ${600 * size}`,
-          transform: [
-            `translate(0 ${400 * size})`,
-            `translate(0 ${200 * size})`,
-            undefined,
-          ],
+          transform: [`translate(0 ${400 * size})`, `translate(0 ${200 * size})`, undefined],
           rectWidth: 5,
           rectHeight: 200 * size,
         },
@@ -135,11 +98,7 @@ export default function BoardLine({
           width: 600 * size,
           height: 600 * size,
           viewBox: `0 0 ${600 * size} ${600 * size}`,
-          transform: [
-            `translate(${400 * size})`,
-            `translate(${200 * size})`,
-            undefined,
-          ],
+          transform: [`translate(${400 * size})`, `translate(${200 * size})`, undefined],
           rectWidth: 200 * size,
           rectHeight: 600 * size,
         },
@@ -151,11 +110,7 @@ export default function BoardLine({
           width: 600 * size,
           height: 600 * size,
           viewBox: `0 0 ${600 * size} ${600 * size}`,
-          transform: [
-            `translate(${400 * size})`,
-            undefined,
-            `translate(${200 * size})`,
-          ],
+          transform: [`translate(${400 * size})`, undefined, `translate(${200 * size})`],
           rectWidth: 200 * size,
           rectHeight: 600 * size,
         },
@@ -182,28 +137,13 @@ export default function BoardLine({
           xmlns="http://www.w3.org/2000/svg"
         >
           <g clipPath={`url(#clip0_0_1_${orientation})`}>
-            <BoardPaths
-              size={size}
-              orientation={orientation}
-              visible={visible}
-              delay={delay}
-            />
+            <BoardPaths size={size} orientation={orientation} visible={visible} delay={delay} />
           </g>
           <g clipPath={`url(#clip1_0_1_${orientation})`}>
-            <BoardPaths
-              size={size}
-              orientation={orientation}
-              visible={visible}
-              delay={delay}
-            />
+            <BoardPaths size={size} orientation={orientation} visible={visible} delay={delay} />
           </g>
           <g clipPath={`url(#clip2_0_1_${orientation})`}>
-            <BoardPaths
-              size={size}
-              orientation={orientation}
-              visible={visible}
-              delay={delay}
-            />
+            <BoardPaths size={size} orientation={orientation} visible={visible} delay={delay} />
           </g>
           <defs>
             <clipPath id={`clip0_0_1_${orientation}`}>
